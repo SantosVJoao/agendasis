@@ -8,18 +8,35 @@ namespace AgendaSis.Domain.Entidades
     {
         protected PessoaJuridica() { }
 
-        public PessoaJuridica(string nome, string telefone, string endereco, string email, string cnpj, string razaoSocial, DateTime dataAbertura)
+        public PessoaJuridica(
+            string nome, 
+            string telefone, 
+            string endereco, 
+            string email, 
+            string cnpj, 
+            string razaoSocial, 
+            DateTime dataAbertura
+        )
             : base(nome, telefone, endereco, email)
         {
             Cnpj = cnpj;
+            Cnpj = cnpj.Replace(".", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty);
             RazaoSocial = razaoSocial;
             DataAbertura = dataAbertura;
         }
 
-        public void UpdateValues(string nome, string telefone, string endereco, string email, string cnpj, string razaoSocial, DateTime dataAbertura)
+        public void UpdateValues(
+            string nome, 
+            string telefone, 
+            string endereco, 
+            string email, 
+            string cnpj, 
+            string razaoSocial, 
+            DateTime dataAbertura)
         {
             UpdateValues(nome, telefone, endereco, email);
             Cnpj = cnpj;
+            Cnpj = cnpj.Replace(".", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty);
             RazaoSocial = razaoSocial;
             DataAbertura = dataAbertura;
         }

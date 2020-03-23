@@ -1,8 +1,10 @@
+using AgendaSis.Application.Services.Agendas;
 using AgendaSis.Application.Services.Generos;
 using AgendaSis.Application.Services.Pessoas;
 using AgendaSis.Application.Services.Salas;
 using AgendaSis.Domain.Interfaces;
 using AgendaSis.Infra.Contexto;
+using AgendaSis.Infra.Filtros;
 using AgendaSis.Infra.Repositorios;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,7 +29,7 @@ namespace AgendaSis.Web
         {
             services
                 .AddDbContext<MeuContexto>(
-                    opt => opt.UseNpgsql(Configuration["ConnectionStrings:MinhaStringConexao"])
+                    opt => opt.UseNpgsql(Configuration["MinhaStringConexao"])
                 );
 
             services.AddScoped<ISalaRepository, SalaRepository>();
@@ -41,6 +43,11 @@ namespace AgendaSis.Web
             services.AddScoped<IPessoaFisicaService, PessoaFisicaService>();
             services.AddScoped<IPessoaJuridicaRepository, PessoaJuridicaRepository>();
             services.AddScoped<IPessoaJuridicaService, PessoaJuridicaService>();
+
+            services.AddScoped<IAgendaRepository, AgendaRepository>();
+            services.AddScoped<IAgendaService, AgendaService>();
+
+            services.AddMvc(options => options.Filters.Add(typeof(JsonExceptionFilter)));
 
             services.AddControllers();
         }

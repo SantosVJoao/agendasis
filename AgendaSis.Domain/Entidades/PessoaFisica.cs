@@ -20,6 +20,7 @@ namespace AgendaSis.Domain.Entidades
             : base(nome, telefone, endereco, email)
         {
             Cpf = cpf;
+            Cpf = cpf.Replace(".", string.Empty).Replace("-", string.Empty);
             GeneroId = generoId;
             DataNascimento = dataNascimento;
         }
@@ -36,6 +37,7 @@ namespace AgendaSis.Domain.Entidades
         {
             UpdateValues(nome, telefone, endereco, email);
             Cpf = cpf;
+            Cpf = cpf.Replace(".", string.Empty).Replace("-", string.Empty);
             GeneroId = generoId;
             DataNascimento = dataNascimento;
         }
